@@ -1,0 +1,27 @@
+.button--primary {
+	color:$c-global;
+	text-transform:uppercase;
+	font-size:16px;
+	letter-spacing:.06em !important;
+	font-family:'newparis';
+	
+	
+	&:after {
+		@extend .trans;
+		content:' ';
+		display:block;
+		height:4px;
+		width:100%;
+		background:transparent;
+	}
+	
+	&:hover, &.disabled, &.active {
+		&:after {
+			background:$c-white;
+		}
+	}
+}
+
+button:focus, button:active {
+	outline:none;
+}

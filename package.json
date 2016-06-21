@@ -1,0 +1,65 @@
+{
+  "name": "Our-Use",
+  "version": "1.0.0",
+  "description": "Intro",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Daniel Hirunrusme",
+  "license": "MIT",
+  "dependencies": {
+    "audio5": "0.1.10",
+    "canvid": "^1.6.0",
+    "disable-scroll": "^0.2.6",
+    "jquery-lazyload": "^1.9.7",
+    "jquery-mobile": "^1.4.1",
+    "jquery-mousewheel": "^3.1.13",
+    "pjax": "0.1.4",
+    "velocity-animate": "^1.2.3",
+    "vimeo-froogaloop2": "^0.1.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.1",
+    "browserify": "^13.0.0",
+    "browserify-shim": "^3.8.12",
+    "gulp": "^3.9.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.5.3",
+    "gulp-newer": "^1.1.0",
+    "gulp-postcss": "^6.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-strip-debug": "^1.1.0",
+    "gulp-util": "^3.0.7",
+    "minifyify": "^7.2.1",
+    "pretty-hrtime": "^1.0.1",
+    "velocity-animate": "^1",
+    "vinyl-ftp": "^0.4.5",
+    "watchify": "^3.7.0",
+    "stripify": "^4.0.0",
+    "disable-scroll": "^0.2.6",
+    "vide": "^0.5.0",
+	"canvid": "1.6.0"
+  },
+  "browser": {
+    "velocity-animate": "./node_modules/velocity-animate/velocity.min.js",
+    "jquery-mousewheel": "./node_modules/jquery-mousewheel/jquery.mousewheel.js",
+    "pjax": "./node_modules/pjax/src/pjax.js"
+  },
+  "browserify-shim": {
+    "jquery": "global:$",
+    "velocity-animate": "velocity",
+    "jquery-mousewheel": "mousewheel",
+    "pjax": "pjax",
+    "disable-scroll": "disable-scroll",
+    "vide": "vide",
+	"canvid": "canvid"
+  }
+}

@@ -1,0 +1,14 @@
+@mixin opacity($opacity) {
+	opacity: $opacity;
+	$opacity-ie: $opacity * 100;
+	filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+%bg-image {
+	background-position:center center;
+	background-size:cover;
+	background-repeat:no-repeat;
+    width: 100%;
+    height: 100%;
+	background-color:black;
+}

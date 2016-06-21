@@ -1,0 +1,71 @@
+.project {
+	
+	display:none;
+	
+	&.active {
+		@include flexbox;
+		
+		@include break(phone) {
+		    display:none;
+		}
+	}
+	
+	@include break(phone) {
+	    opacity: 1 !important;
+	}
+	
+	article {
+		@include flexbox;
+		@include justify-content(space-between);
+		@include flex-direction(column);
+		margin:0 auto;
+		max-width:$max-width;
+		width: calc(100% - 180px);
+		padding:0;
+		
+		@include break(phone) {
+			width:80%;
+			margin:0 auto;
+		}
+		
+		aside {
+			z-index:2;
+			width:480px;
+			margin-top:150px;
+			
+			@include break(phone) {
+				width:100%;
+				display:none;
+			}
+			
+			.sub-header {
+				@extend %h1;
+				text-transform:uppercase;
+				margin-bottom:1em;
+				
+			}
+			
+			.description {
+				text-transform:uppercase;
+			}
+			
+			a {
+				display:inline-block;
+				padding:2em;
+				margin-left:-2em;
+				padding-top:45px;
+				
+				@include break(laptop) {
+					//width:100%;
+					padding-top:32px;
+				}
+				
+				@include break(phone) {
+					
+				}
+			}
+		}
+		
+	}
+	
+}

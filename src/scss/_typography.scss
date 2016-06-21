@@ -1,0 +1,232 @@
+
+
+%globalText {
+	
+	font-family:'jules', sans-serif;
+	
+	@include font-size($p-font-sizes); 
+	@include line-height($p-line-height); 
+	color:$c-black;
+}
+
+body {
+	@extend %globalText;
+	-webkit-font-smoothing:antialiased;
+	//text-shadow: 0px 0px 2px rgba(0, 0, 3, 0.6);
+}
+
+b, strong {
+	font-weight:normal !important;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, select, input, label, textarea, span, time {
+	
+	letter-spacing: initial !important;
+	word-spacing:initial;
+}
+
+span, time, a {
+	word-spacing:initial;
+}
+
+a {
+	@extend .trans;
+	color:$c-global;
+	text-decoration:none;
+	outline:none;
+	
+	&:hover {
+		color:$c-global;
+	}
+	
+} 
+
+.site-footer a {
+	color:#000;
+}
+
+a.disableAnimation {
+	@extend .notransition;
+}
+
+.disable-link {
+	pointer-events:none;
+}
+
+a, a:active, a:focus, input:focus {
+	outline: none !important;
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: $c-black;
+    background: $c-global;
+}
+
+::selection {
+    color: $c-global;
+    background: $c-black;
+}
+
+li {
+	list-style:none;
+}
+
+address {
+	font-style:normal; 
+}
+
+h1, h2, h3, h4, h5, h6, p, input, select {
+	font-weight:normal;	
+	color:$c-global;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'jules', sans-serif;
+}
+
+content p, content h1 {
+	margin:0 auto;
+}
+
+content h1 {
+	max-width:440px;
+	margin-bottom:37px;
+}
+
+ 
+p {
+
+	letter-spacing:.03em !important; 
+	word-spacing:initial;
+	margin:0 auto;
+	
+	@extend %globalText;
+}
+
+p {
+	@include font-size($p-font-sizes); 
+	@include line-height($p-line-height); 
+}
+
+h1, h2, h3, h4, h5, h6 {
+	@include font-size($h1-font-sizes); 
+	@include line-height($h1-line-height); 
+}
+
+%h1 {
+	@include font-size($h1-font-sizes); 
+	@include line-height($h1-line-height); 
+}
+
+hr {
+	border:none;
+	border-top:1px solid $c-dark-gray;
+}
+
+li {
+	line-height:1.5em;
+}
+
+%small-caps {
+	font-size:10px;
+	letter-spacing:.05em !important;
+}
+
+.headerLabel {
+	margin-top:30px;
+}
+
+/*
+h1 {
+	font-size:25px;
+	line-height:27px;
+	
+	@include break(ipad) { 
+		font-size:2.30769em;
+		line-height:40px;
+	} 
+	
+	@include break(laptop) { 
+		font-size:2.30769em;
+		line-height:40px;
+	} 
+	
+	@include break(desktop) { 
+		font-size:2.30769em;
+		line-height:40px;
+	} 
+}
+*/
+
+
+/*
+h2 {
+	text-transform:uppercase;
+	font-size:17px;
+	line-height:26px;
+	
+	@include break(ipad) { 
+		font-size:17px;
+		line-height:26px;
+	} 
+	
+	@include break(laptop) { 
+		font-size:17px;
+		line-height:26px;
+	} 
+	
+	@include break(desktop) { 
+		font-size:25px;
+		line-height:33px;
+	} 
+}
+*/
+
+.center {
+	text-align:center;
+}
+
+.caps {
+	text-transform:uppercase;
+	letter-spacing:.15em !important;
+	
+	@include font-size($p-font-sizes); 
+	@include line-height($p-line-height); 
+}
+
+
+.mobile-break {
+	display:none !important;
+	@include break('small') {
+		display:block !important;
+	}
+}
+
+
+button {
+	background:none;
+	border:none;
+}
+
+
+input[type="text"] {
+	background:#ccc;
+	border:none;
+	
+	&:hover, &:focus {
+		background:#d1d1d1
+	}
+}
+
+
+
+input[type="submit"] {
+	border:2px solid $c-black;
+	color:$c-black;
+	background:$c-white;
+	
+	&:hover, &.disabled {
+		color:$c-white;
+		background:$c-black;
+	}
+}

@@ -1,0 +1,64 @@
+$breakpoints: (
+  'small'  : ( max-width:  500px ),
+  'phone'  : ( max-width:  767px ),
+  'ipad' : ( max-width:  1000px ),
+  'laptop'  : ( max-width: 1440px ),
+  'desktop'  : ( min-width: 1440px )
+);
+ 
+@mixin break($name) {
+  // If the key exists in the map
+  @if map-has-key($breakpoints, $name) {
+    // Prints a media query based on the value
+    @media #{inspect(map-get($breakpoints, $name))} {
+      @content;
+    }
+  }
+
+  // If the key doesn't exist in the map
+  @else {
+    @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+        + "Please make sure it is defined in `$breakpoints` map.";
+  }
+}
+
+$mobile-small-max-size: 320px !default;
+$mobile-max-size: 640px !default;
+$tablet-min-size: 768px !default;
+$tablet-max-size: 979px !default;
+$desktop-min-size: 979px !default;
+$desktop-large-min-size: 1200px !default;
+
+
+@mixin respond-to($media) {
+  @if $media == mobile-small {
+          @media only screen and (max-width: $mobile-small-max-size) { @content; }
+  }
+  @else if $media == mobile {
+          @media only screen and (max-width: $mobile-max-size) { @content; }
+  }
+  @else if $media == mobile-portrait {
+          @media only screen and (max-width: $mobile-max-size) and (orientation: portrait) { @content; }
+  }
+  @else if $media == mobile-landscape {
+          @media only screen and (max-width: $mobile-max-size) and (orientation: landscape) { @content; }
+  }
+  @else if $media == mobile-tablet {
+          @media only screen and (max-width: $tablet-max-size) { @content; }
+  }
+  @else if $media == tablet {
+          @media only screen and (min-width: $tablet-min-size) and (max-width: $tablet-max-size) { @content; }
+  }
+  @else if $media == tablet-landscape {
+          @media only screen and (min-width: $tablet-max-size) and (orientation: landscape) { @content; }
+  }
+  @else if $media == tablet-desktop {
+          @media only screen and (min-width: $tablet-max-size) { @content; }
+  }
+  @else if $media == desktop {
+          @media only screen and (min-width: $desktop-min-size) { @content; }
+  }
+  @else if $media == desktop-large {
+          @media only screen and (min-width: $desktop-large-min-size) { @content; }
+  }
+}

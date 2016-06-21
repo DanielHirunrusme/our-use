@@ -1,0 +1,28 @@
+.video {
+	//@include transition(3s opacity);
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	z-index:1;
+	@include opacity(.5);
+	
+	@include break(phone) {
+		display:none;
+	}
+}
+
+.videoMobile {
+	display:none;
+	
+	@include break(phone) {
+		display:block;
+	}
+}
+
+.theaterMode {
+	.video {
+		//@include opacity(1);
+	}
+}

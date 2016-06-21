@@ -1,0 +1,68 @@
+.volume {
+	@include flexbox;
+	@include align-items(flex-end);
+	left:0;
+	height:14px;
+	z-index:2;
+	padding:40px;
+	margin-left:-40px;
+	width:105px;
+	@extend.trans;
+	@include opacity(.5);
+	
+	&.on {
+		@include opacity(1);
+	}
+	
+	&.off {
+		@include opacity(0);
+	}
+	
+	
+	.bar {
+		background:$c-white;
+		width:3px;
+		margin-right:3px;
+		margin-bottom:23px;
+		float:left;
+	}
+	
+	.bar-0 {
+		height:5px;
+	}
+	
+	.bar-1 {
+		height:8px;
+	}
+	
+	.bar-2 {
+		height:11px;
+	}
+	
+	.bar-3 {
+		height:14px;
+	}
+}
+
+
+.volume-toggle {
+	font-size:10px;
+	left:0;
+	z-index:3;
+	color:#fff;
+	font-family:'newparis';
+	padding:23px 23px 32px 23px;
+	margin-left:-23px;
+	@include align-self(flex-start);
+	letter-spacing:.05em !important;
+	text-transform:uppercase;
+	
+	@include break(phone) {
+		display:none;
+	}
+	 
+	.mode {
+		border-bottom:1px solid #fff;
+	}
+	
+}
