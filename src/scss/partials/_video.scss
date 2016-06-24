@@ -9,6 +9,12 @@
 	@include opacity(.5);
 	
 	@include break(phone) {
+		
+	}
+}
+
+.isMobile {
+	.video {
 		display:none;
 	}
 }
@@ -18,11 +24,56 @@
 	
 	@include break(phone) {
 		display:block;
+		@include opacity(.65);
+	}
+	
+	@media only screen and (min-device-width: 320px) and (max-device-width: 800px) and (orientation: landscape) {
+		display:none;
 	}
 }
 
 .theaterMode {
 	.video {
 		//@include opacity(1);
+	}
+}
+
+.view-work-dummy {
+	display:none;
+	
+	@include break(phone) {
+		display:block;
+	}
+	
+	position:absolute;
+	left:0; top:0;
+	width:100%; height:100%;
+	z-index:9999999;
+}
+
+.view-work-mobile {
+	display:none;
+	
+	
+	
+	position:absolute;
+	top:0; left:10%;
+	height:100%;
+	width:80%;
+	
+	z-index:2;
+	text-align:center;
+	border-bottom: 2px solid #fff;
+	
+	
+	
+	.view-work {
+		padding-bottom:20px;
+	}
+	
+	@include break(phone) {
+		@include flexbox;
+		@include flex-direction(column);
+		@include justify-content(space-between);
 	}
 }

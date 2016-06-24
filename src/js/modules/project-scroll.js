@@ -14,10 +14,10 @@ module.exports = function( el ) {
 		topVal  = 0,
 		opacityVal = 0,
 		topNavHeightVal = $('header.content').height(),
-		topContainer = true;
+		topContainer = $('#section-body').scrollTop();
 		
 		$window.on('mousewheel', function(e){
-			if(settings.isMobile || !topContainer) return true;
+			if(settings.isMobile || $('#section-body').scrollTop() > 0) return true;
 			/*
 			*	SET POSITION OF THE CONTAINER
 			*/
@@ -67,12 +67,12 @@ module.exports = function( el ) {
 			}
 			
 			if(topVal + $window.height() <= 0){
-				if(topContainer)
+				if($('#section-body').scrollTop() <= 0)
 				$('.disable-scroll').hide();
 				//$('#main').remove();
 				//$window.off('mousewheel');
 			} else {
-				if(topContainer)
+				if($('#section-body').scrollTop() <= 0)
 				$('.disable-scroll').show();
 			}
 		}
@@ -80,9 +80,9 @@ module.exports = function( el ) {
 		
 		$('#section-body').on('scroll', function(){
 			if($('#section-body').scrollTop() <= 0) {
-				topContainer = true;
+				$('body').data('top', 'true');
 			} else {
-				topContainer = false;
+				$('body').data('top', 'false')
 			}
 		});
 		

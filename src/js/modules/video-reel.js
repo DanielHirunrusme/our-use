@@ -2,29 +2,29 @@ var settings = require( "modules/settings" ),
 	throttle = require( "modules/throttle" ),
 	canvid   = require( "canvid" );
 
-
- 
-
 module.exports = function( el ) {
 		var $el = $(el),
 			$button = $('aside .button--primary'),
 			$volume = $('.volume-toggle'),
 			$mode = $volume.find('.mode'),
 			$window = $(window),
-			$videoMobile = $('#videoMobile');
+			$videoMobile = $('#videoMobile'),
+			$viewWorkDummy = $('.view-work-dummy');
 			
 		var playing = true,
-			instance = $el.data('vide'),
+			video,
+			instance,
 			links = [],
 			topVal = 0,
-			video = instance.getVideoObject(),
 			theaterTimer,
 			isTheaterMode,
 			volumeLevel = 1,
 			mobileVideoLoaded = false,
+			desktopVideoLoaded = false,
 			start = {x:0,y:0};
 		
-		
+		var clips = [{name:"clip1", length:84 }, {name:"clip2", length:74}],
+			selectedClip = clips[ Math.floor( Math.random() * clips.length ) ];
 		
 		function init(){
 			
@@ -32,61 +32,136 @@ module.exports = function( el ) {
 					links.push( { time:$(this).data('time'), title:$(this).data('title'), url:$(this).data('url') } )
 			});
 			
+			createVideo();
+			
+			/*
 			$(video).on( "timeupdate", 
 			    function(event){
 			      onTrackedVideoFrame(this.currentTime, this.duration);
 			});
 			
-			if($window.width()<768){
-				settings.isMobile = true;
-			} else {
-				settings.isMobile = false;
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				instance.destroy();
+			 	//$('.video').remove();
 			}
+			*/
+
 			
 			detectMode();
 			theaterMode();
 			
-			$button.on('mouseover', buttonOver).on('mouseout', buttonOut).on('click', buttonClick);
-			$volume.on('click', toggleVolume);
-			$videoMobile.on('click', buttonClick);
+			
+			
+			//$videoMobile.on('click', buttonClick);
+			$viewWorkDummy.on('click', buttonClick);
+			
+		}
+		
+		function createVideo(){
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				settings.isMobile = true;
+				
+				$('body').addClass('isMobile');
+				
+				var canvidControl = canvid({
+				    selector : '.videoMobile',
+				    videos: {
+				        clip1: { src: 'assets/video/'+ selectedClip.name +'.jpg', frames: selectedClip.length, fps: 20, cols: 10, loops: 1, onEnd: function(){
+				          console.log('clip1 ended.');
+				          canvidControl.play('clip1');
+				        }},
+				    },
+				    width: $window.height() * .67,
+				    height: $window.height(),
+				    loaded: function() {
+						mobileVideoLoaded = true;
+				        canvidControl.play('clip1');
+				        // reverse playback
+				        // canvidControl.play('clip1', true);
+				    }
+				});
+			
+			
+			} else {
+				settings.isMobile = false;
+				
+				 $el.vide('assets/video/video-1', {
+				    volume: 1,
+				    playbackRate: 1,
+				    loop: true,
+					muted: false,
+				    autoplay: true,
+				    position: '0% 0%', // Similar to the CSS `background-position` property. 
+				    posterType: 'jpg', // Poster image type. "detect" — auto-detection; "none" — no poster; "jpg", "png", "gif",... - extensions. 
+				    resizing: true, // Auto-resizing, read: https://github.com/VodkaBears/Vide#resizing 
+				    bgColor: '#000000', // Allow custom background-color for Vide div, 
+				});
+				
+				video = $el.find('video').get(0);
+				desktopVideoLoaded = true;
+				
+				$(video).on( "timeupdate", 
+				    function(event){
+				      onTrackedVideoFrame(this.currentTime, this.duration);
+				});
+				
+				$button.on('mouseover', buttonOver).on('mouseout', buttonOut).on('click', buttonClick);
+				
+				$volume.on('click', toggleVolume);
+				//toggleVolume();
+			}
+			
+	 	   	//data-vide-bg="mp4: assets/video/video-1, poster: assets/video/video-1-poster"
+	 	    //data-vide-options="posterType: jpg, loop: true, muted: false, position: 0% 0%"
 		}
 		
 		function toggleVolume(){
 			$volume.toggleClass('on');
 			if($volume.hasClass('on')){
-				video.volume = 1;
-				$mode.text('off');
-			} else {
-				video.volume = 0;
+				$(video).get(0).volume = 1;
 				$mode.text('on');
+			} else {
+				$(video).get(0).volume = 0;
+				$mode.text('off');
 			}
 		}
 		
 		function buttonOver(){
 			playing = false;
-			video.pause();
+			$(video).get(0).pause();
 		}
 		
 		function buttonOut(){
 			playing = true;
-			video.play();
+			$(video).get(0).play();
 		}
 		
 		function buttonClick(e){
 			e.preventDefault();
 			
+			
+			$window.off('mousemove');
+			clearTimeout( theaterTimer );
+			
+			$('.disable-scroll').hide();
+			
 			$('.overlay').addClass('waiting');
 			$button.off('mouseout').addClass('active');
 			$('#main article').off('mouseout');
-			$('.video').velocity('stop').velocity({ opacity:.5 }, {duration: settings.animationSpeed});
-			$volume.addClass('off');
-			$('.test-title').text($button.data('title'));
+
 			playing = false;
-			video.pause();
+			
+			if(!settings.isMobile) {
+				$('.test-title').text($button.data('title'));
+				$volume.addClass('off');
+				$('.video').velocity('stop').velocity({ opacity:.5 }, {duration: settings.animationSpeed});
+				video.pause();
+			}
+			
 			$window.off('mousewheel');
 			
 			if(!settings.isMobile)
-			setTimeout(function(){ loadProject(); }, 2000);
+			setTimeout(function(){ loadProject(); }, 300);
 			else
 			loadProject();
 		}
@@ -115,12 +190,9 @@ module.exports = function( el ) {
 		}
 		
 		$window.on('mousewheel', function(e){
-
 			
 			topVal += e.deltaY;
 			
-			
-		
 			if(topVal <= -$window.height()){
 				if(playing) {
 					playing = false;
@@ -181,48 +253,42 @@ module.exports = function( el ) {
 		
 		
 		function winResize(){
+			
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				settings.isMobile = true;
+				$('body').addClass('isMobile');
+				if(!mobileVideoLoaded)createVideo();
+			} else {
+				settings.isMobile = false;	
+				$('body').removeClass('isMobile');
+				if(desktopVideoLoaded)$('video').css('height', '100%');
+			}
+			
 			console.log('resize');
 			if($window.width()<768){
 				theaterModeOn();
 				detectMode();
-				settings.isMobile = true;
+				//settings.isMobile = true;
 			} else {
 				theaterMode();
-				settings.isMobile = false;
+				//settings.isMobile = false;
 			}
+			
 			
 			detectMode();
 		}
 		
 		function detectMode(){
 			if(settings.isMobile) {
-				if(mobileVideoLoaded) {
+			
 					if($window.width() < $window.height()){
-						$('.videoMobile canvas').attr('width', $window.height() * .6666).attr('height', $window.height());
+						$('.videoMobile canvas').attr('width', $window.height() * .68).attr('height', $window.height());
 					} else {
 						$('.videoMobile canvas').attr('width', $window.width()).attr('height', $window.width() * 1.5 );
+						//console.log( $('.videoMobile canvas')[0].getContext('2d') );
 					}
 					
-				} else {
-					console.log('LOAD MOBILE VID')
-					mobileVideoLoaded = true;
-					var canvidControl = canvid({
-					    selector : '.videoMobile',
-					    videos: {
-					        clip1: { src: 'assets/video/myvideo.jpg', frames: 194, fps: 30, cols: 10, loops: 1, onEnd: function(){
-					          console.log('clip1 ended.');
-					          canvidControl.play('clip1');
-					        }},
-					    },
-					    width: $window.height() * .6666,
-					    height: $window.height(),
-					    loaded: function() {
-					        canvidControl.play('clip1');
-					        // reverse playback
-					        // canvidControl.play('clip1', true);
-					    }
-					});
-				}
+				 
 			} else {
 				
 			}

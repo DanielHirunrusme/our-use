@@ -26,13 +26,23 @@
 	</div>
 </header>
 
+<div class="view-work-dummy"></div>
+
 <main id="main" data-module-init="project-scroll">
-	<div data-module-init="video-reel" class="video"
-	  data-vide-bg="mp4: assets/video/video-1, poster: assets/video/video-1-poster"
-	  data-vide-options="posterType: jpg, loop: true, muted: false, position: 0% 0%">
-	</div>
+	<div data-module-init="video-reel" class="video"></div>
 	
 	<div id="videoMobile" class="videoMobile"></div>
+	
+	<div class="view-work-mobile">
+		
+		<br>
+		<div>
+			<h1>OUR•USE</h1>
+			<p class="sub-header">Noun | /’är, yOos/</p>
+			<p class="description">a singular creative perspective and design philosophy born from international experience, connections and multimedia expertise.</p>
+		</div>
+		<a class="button--primary view-work" href="#" data-title="Project 1" title="View Work">View Work</a>
+	</div>
 	
 	<section id="" class="project active" data-time="1" data-title="Project 1" data-url="http://our-use/project-1" data-module-init="project">
 		<article>
@@ -54,22 +64,18 @@
 				<div class="bar bar-3"></div>
 			</button>
 			-->
-			<button class="volume-toggle">
+			<button class="volume-toggle on">
 				AUDIO <span class="mode">ON</span>
 			</button>
 		</article>
 	</section>
+	
+
 	<section id="" class="project" data-time="10" data-title="Project 2" data-url="http://our-use/project-2" data-module-init="project">
-		<article>
-			</article>
 	</section>
 	<section id="" class="project" data-time="20" data-title="Project 3" data-url="http://our-use/project-3" data-module-init="project">
-		<article>
-			</article>
 	</section>
 	<section id="" class="project" data-time="30" data-title="Project 4" data-url="http://our-use/project-4" data-module-init="project">
-		<article>
-			</article>
 	</section>
 	
 	
