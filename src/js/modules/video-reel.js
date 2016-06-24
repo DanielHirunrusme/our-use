@@ -152,7 +152,7 @@ module.exports = function( el ) {
 			playing = false;
 			
 			if(!settings.isMobile) {
-				$('.test-title').text($button.data('title'));
+				//$('.test-title').text($button.data('title'));
 				$volume.addClass('off');
 				$('.video').velocity('stop').velocity({ opacity:.5 }, {duration: settings.animationSpeed});
 				video.pause();

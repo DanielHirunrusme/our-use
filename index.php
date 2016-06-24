@@ -71,11 +71,11 @@
 	</section>
 	
 
-	<section id="" class="project" data-time="10" data-title="Project 2" data-url="http://our-use/project-2" data-module-init="project">
+	<section id="" class="project" data-time="10" data-url="http://our-use/project-2" data-module-init="project">
 	</section>
-	<section id="" class="project" data-time="20" data-title="Project 3" data-url="http://our-use/project-3" data-module-init="project">
+	<section id="" class="project" data-time="20" data-url="http://our-use/project-3" data-module-init="project">
 	</section>
-	<section id="" class="project" data-time="30" data-title="Project 4" data-url="http://our-use/project-4" data-module-init="project">
+	<section id="" class="project" data-time="30" data-url="http://our-use/project-4" data-module-init="project">
 	</section>
 	
 	
