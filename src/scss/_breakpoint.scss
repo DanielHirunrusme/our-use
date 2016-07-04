@@ -2,8 +2,8 @@ $breakpoints: (
   'small'  : ( max-width:  500px ),
   'phone'  : ( max-width:  767px ),
   'ipad' : ( max-width:  1000px ),
-  'laptop'  : ( max-width: 1440px ),
-  'desktop'  : ( min-width: 1440px )
+  'laptop'  : ( max-width: 1024px ),
+  'desktop'  : ( min-width: 1024px )
 );
  
 @mixin break($name) {

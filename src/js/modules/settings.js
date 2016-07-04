@@ -17,10 +17,12 @@ var settings = module.exports = {
 		left: $(window).width() * .03
 	},
 	animationSpeed: 400,
-	isMobile:false
+	isMobile:false,
+	playing:false
 };
 
 settings.breakpoints = settings.breakpoints;
+settings.playing = settings.playing;
 settings.isMobile = settings.isMobile;
 
 /*

@@ -1,3 +1,4 @@
+
 .main-wrapper {
 	position:absolute;
 	top:0;
@@ -39,3 +40,22 @@
 .ui-loader {
 	display:none;
 }
+
+/*
+#wrapper {
+    position: relative;
+    min-height: 100%;
+    margin-bottom: -170px;
+    padding-bottom: 170px;
+	
+	@media (min-width: 320px) {
+	    margin-bottom: -143px !important;
+	    padding-bottom: 143px !important;
+	}
+	
+	@media (min-width: 768px) {
+	    margin-bottom: -171px !important;
+	    padding-bottom: 92px !important;
+	}
+}
+*/

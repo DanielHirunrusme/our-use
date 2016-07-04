@@ -40,7 +40,7 @@ function browserifyTask( dev, cb ) {
   //b.transform("stripify")
   // Add minify plugin w/ source map options
   
-  
+  /*
   b.plugin( "minifyify", {
     map: outputFile + ".map",
     output: bundleOpts.output + ".map",
@@ -49,7 +49,7 @@ function browserifyTask( dev, cb ) {
       return path.join( "../../", p );
     }
   });
-  
+  */
 
   // Re-usable function to start the bundler instance
   function bundle() {

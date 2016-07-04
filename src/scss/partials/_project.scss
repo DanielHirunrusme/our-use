@@ -1,71 +1,116 @@
-.project {
+#new-homepage {
+	.project {
 	
-	display:none;
+		display:none;
 	
-	&.active {
-		@include flexbox;
+		&.active {
+			@include flexbox;
 		
-		@include break(phone) {
-		    display:none;
-		}
-	}
-	
-	@include break(phone) {
-	    opacity: 1 !important;
-	}
-	
-	article {
-		@include flexbox;
-		@include justify-content(space-between);
-		@include flex-direction(column);
-		margin:0 auto;
-		max-width:$max-width;
-		width: calc(100% - 180px);
-		padding:0;
-		
-		@include break(phone) {
-			width:80%;
-			margin:0 auto;
-		}
-		
-		aside {
-			z-index:2;
-			width:480px;
-			margin-top:150px;
-			
 			@include break(phone) {
-				width:100%;
-				display:none;
-			}
-			
-			.sub-header {
-				@extend %h1;
-				text-transform:uppercase;
-				margin-bottom:1em;
-				
-			}
-			
-			.description {
-				text-transform:uppercase;
-			}
-			
-			a {
-				display:inline-block;
-				padding:2em;
-				margin-left:-2em;
-				padding-top:45px;
-				
-				@include break(laptop) {
-					//width:100%;
-					padding-top:32px;
-				}
-				
-				@include break(phone) {
-					
-				}
+			    display:none;
 			}
 		}
-		
-	}
 	
+		@include break(phone) {
+		    opacity: 1 !important;
+		}
+	
+		article {
+			@include flexbox;
+			@include justify-content(space-between);
+			@include flex-direction(column);
+			margin:0 auto;
+			max-width:$max-width;
+			//width: calc(100% - 180px);
+			padding:0;
+		
+			@media (min-width: 320px) {
+			 	width:85%;
+			}
+		
+			@media (min-width: 375px) {
+			 	width:88%;
+			}
+		
+			@media (min-width: 768px) {
+			 	width:80%;
+			}
+		
+			@media (min-width: 928px) {
+			 	width:738px;
+			}
+		
+			@media (min-width: 1024px) {
+			 	width:1024px;
+			}
+		
+			@media (min-width: 1260px) {
+			 	width:1260px;
+			}
+		
+			@media (min-width: 1514px) {
+			 	width:1514px;
+			}
+		
+			aside {
+				z-index:2;
+				width:100%;
+				margin-top:150px;
+			
+				p {
+					text-transform:uppercase;
+				}
+			
+			
+				@include break(phone) {
+					width:100%;
+					display:none;
+				}
+			
+				.sub-header {
+					@extend %h1;
+					text-transform:uppercase;
+					margin-bottom:1em;
+				
+				}
+			
+				.description {
+					text-transform:uppercase;
+				}
+			
+				a {
+					display:inline-block;
+					padding:2em;
+					margin-left:-2em;
+					padding-top:45px;
+				
+					@include break(laptop) {
+						//width:100%;
+						padding-top:32px;
+					}
+				
+					@include break(phone) {
+					
+					}
+				}
+			}
+		
+		}
+	
+	}
+}
+
+#new-homepage {
+
+	.view-work-mobile {
+	
+		.sub-header {
+			margin-bottom:1em;
+		}
+	
+		p {
+			text-transform:uppercase;
+		}
+	}
+
 }

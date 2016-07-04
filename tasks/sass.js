@@ -10,7 +10,7 @@ var path = require( "path" );
 /** Defines the "sass" task for Gulp. */
 gulp.task( "sass", function() {
   var sassOpts = {
-    outputStyle: "compressed"
+    outputStyle: "none"
   };
 
   return gulp.src( "./src/scss/*.scss" )

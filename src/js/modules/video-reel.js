@@ -54,7 +54,7 @@ module.exports = function( el ) {
 			
 			//$videoMobile.on('click', buttonClick);
 			$viewWorkDummy.on('click', buttonClick);
-			
+			//$('.work-nav').on('click', buttonClick);
 		}
 		
 		function createVideo(){
@@ -62,6 +62,16 @@ module.exports = function( el ) {
 				settings.isMobile = true;
 				
 				$('body').addClass('isMobile');
+				
+				var w, h;
+				
+				if($window.width() < $window.height()){
+					w = $window.width();
+					h = $window.height();
+				} else {
+					w = $window.width();
+					h = $window.width() * 1.5;
+				}
 				
 				var canvidControl = canvid({
 				    selector : '.videoMobile',
@@ -71,10 +81,11 @@ module.exports = function( el ) {
 				          canvidControl.play('clip1');
 				        }},
 				    },
-				    width: $window.height() * .67,
-				    height: $window.height(),
+				    width: w,
+				    height: h,
 				    loaded: function() {
 						mobileVideoLoaded = true;
+						settings.playing = true;
 				        canvidControl.play('clip1');
 				        // reverse playback
 				        // canvidControl.play('clip1', true);
@@ -99,13 +110,14 @@ module.exports = function( el ) {
 				
 				video = $el.find('video').get(0);
 				desktopVideoLoaded = true;
+				settings.playing = true;
 				
 				$(video).on( "timeupdate", 
 				    function(event){
 				      onTrackedVideoFrame(this.currentTime, this.duration);
 				});
 				
-				$button.on('mouseover', buttonOver).on('mouseout', buttonOut).on('click', buttonClick);
+				$button.on('mouseover', buttonOver).on('mouseout', buttonOut);
 				
 				$volume.on('click', toggleVolume);
 				//toggleVolume();
@@ -128,11 +140,13 @@ module.exports = function( el ) {
 		
 		function buttonOver(){
 			playing = false;
+			settings.playing = false;
 			$(video).get(0).pause();
 		}
 		
 		function buttonOut(){
 			playing = true;
+			settings.playing = true;
 			$(video).get(0).play();
 		}
 		
@@ -150,6 +164,7 @@ module.exports = function( el ) {
 			$('#main article').off('mouseout');
 
 			playing = false;
+			settings.playing = false;
 			
 			if(!settings.isMobile) {
 				//$('.test-title').text($button.data('title'));
@@ -158,10 +173,10 @@ module.exports = function( el ) {
 				video.pause();
 			}
 			
-			$window.off('mousewheel');
+			//$window.off('mousewheel');
 			
 			if(!settings.isMobile)
-			setTimeout(function(){ loadProject(); }, 300);
+			setTimeout(function(){ loadProject(); }, 100);
 			else
 			loadProject();
 		}
@@ -173,7 +188,8 @@ module.exports = function( el ) {
 				{duration: (settings.animationSpeed * 2),
 			     complete:function(){ 
 					 $('.overlay').hide(); 
-					 $('#main').remove();
+					 topVal = -$window.height();
+					 //$('#main').remove();
 				 }});
 			$('#main').velocity('stop').velocity({ translateY:'-100%' }, {duration: (settings.animationSpeed * 2) });
 		}
@@ -192,18 +208,21 @@ module.exports = function( el ) {
 		$window.on('mousewheel', function(e){
 			
 			topVal += e.deltaY;
+			topVal = topVal > 0 ? 0 : topVal;
+			topVal = topVal < -$window.height() ? -$window.height() : topVal; 
 			
 			if(topVal <= -$window.height()){
 				if(playing) {
 					playing = false;
-					video.pause();
+					settings.playing = false;
+					if(!settings.isMobile)video.pause();
 				}
 				
 			} else {
 				if(!playing) {
-	
+					settings.playing = true;
 					playing = true;
-					video.play();
+					if(!settings.isMobile)video.play();
 				}
 			}
 		})
@@ -230,7 +249,7 @@ module.exports = function( el ) {
 		function theaterModeOn(){
 			console.log( 'theater mode on ' );
 			isTheaterMode = true;
-			$('body').addClass('theaterMode');
+			$('#new-homepage').addClass('theaterMode');
 			
 			//animate video in
 			$('.video').velocity('stop').velocity({ opacity:1 }, {duration: settings.animationSpeed});
@@ -242,7 +261,7 @@ module.exports = function( el ) {
 		function theaterModeOff(){
 			console.log( 'theater mode off' );
 			isTheaterMode = false;
-			$('body').removeClass('theaterMode');
+			$('#new-homepage').removeClass('theaterMode');
 			
 			//animation video out
 			$('.video').velocity('stop').velocity({ opacity:.5 }, {duration: settings.animationSpeed});
@@ -261,7 +280,7 @@ module.exports = function( el ) {
 			} else {
 				settings.isMobile = false;	
 				$('body').removeClass('isMobile');
-				if(desktopVideoLoaded)$('video').css('height', '100%');
+				//if(desktopVideoLoaded)$('video').css('height', $window.height());
 			}
 			
 			console.log('resize');
@@ -282,7 +301,7 @@ module.exports = function( el ) {
 			if(settings.isMobile) {
 			
 					if($window.width() < $window.height()){
-						$('.videoMobile canvas').attr('width', $window.height() * .68).attr('height', $window.height());
+						$('.videoMobile canvas').attr('width', $window.width() ).attr('height', $window.height());
 					} else {
 						$('.videoMobile canvas').attr('width', $window.width()).attr('height', $window.width() * 1.5 );
 						//console.log( $('.videoMobile canvas')[0].getContext('2d') );

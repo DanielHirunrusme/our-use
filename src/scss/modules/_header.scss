@@ -1,4 +1,4 @@
-header {
+#new-homepage header {
 	
 	@include flexbox;
 	width:100%;
@@ -15,15 +15,43 @@ header {
 		@include justify-content(space-between);
 		margin:0 auto;
 		padding:25px 0;
-		width:calc(100% - 180px);
-		max-width:$max-width;
+		//width:calc(100% - 180px);
+		//max-width:$max-width;
 		border-bottom:4px solid $c-global;
 		height:58px;
 		
-		@include break(phone) {
-			width:80%;
+		@include break(ipad) {
+			//width:80%;
 			margin:0 auto;
 			border-bottom:none;
+		}
+		
+		@media (min-width: 320px) {
+		 	width:85%;
+		}
+		
+		@media (min-width: 375px) {
+		 	width:88%;
+		}
+		
+		@media (min-width: 768px) {
+		 	width:80%;
+		}
+		
+		@media (min-width: 928px) {
+		 	width:738px;
+		}
+		
+		@media (min-width: 1024px) {
+		 	width:1024px;
+		}
+		
+		@media (min-width: 1260px) {
+		 	width:1260px;
+		}
+		
+		@media (min-width: 1514px) {
+		 	width:1514px;
 		}
 		
 		nav {
@@ -49,7 +77,7 @@ header {
 }
 
 
-.theaterMode {
+#new-homepage.theaterMode {
 	
 	header {
 		
@@ -66,7 +94,7 @@ header {
 }
 
 
-header.under-main {
+#new-homepage header.under-main {
 	z-index:2;
 	
 	.header-inner {

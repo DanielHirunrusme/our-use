@@ -1,16 +1,20 @@
-#main {
-	background:$c-black;
-	height:100%;
-	width:100%;
-	overflow:hidden;
-	position:absolute;
-	left:0;
-	top:0;
-	z-index:3;
+#new-homepage {
 	
-	@media only screen and (min-device-width: 320px) and (max-device-width: 800px) and (orientation: landscape) {
-		background-image:url('video/mobile-landscape-cover.png');
-		background-size:cover;
-		background-position:center center;
+	#main {
+		background:$c-black;
+		height:100%;
+		width:100%;
+		overflow:hidden;
+		position:absolute;
+		left:0;
+		top:0;
+		z-index:3;
+	
+		@media only screen and (min-device-width: 320px) and (max-device-width: 800px) and (orientation: landscape) {
+			background-image:url('video/mobile-landscape-cover.png');
+			background-size:cover;
+			background-position:center center;
+		}
 	}
+	
 }
